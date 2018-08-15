@@ -1,16 +1,48 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          YTBookmark
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <router-link class="navbar-item" to="/">Home</router-link> 
+          <router-link class="navbar-item" to="/about">About</router-link> 
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                 <router-link class="button is-primary" to="/signup">Sign Up</router-link> 
+              </p>
+              <p class="control">
+                <router-link class="button is-info" to="/login">Login</router-link>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <router-view/>
   </div>
 </template>
 
 <style>
+@import "../node_modules/bulma/css/bulma.min.css";
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
