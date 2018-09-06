@@ -3,6 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import firebase from "firebase";
+import VueFire from "vuefire";
+import "firebase/firestore";
 
 Vue.config.productionTip = false;
 
@@ -16,6 +18,12 @@ var config = {
   messagingSenderId: "132162830340"
 };
 firebase.initializeApp(config);
+
+Vue.use(VueFire);
+
+const db = firebase.firestore();
+db.settings({ timestampsInSnapshots: true });
+export { db };
 
 new Vue({
   router,

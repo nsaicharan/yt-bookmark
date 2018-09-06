@@ -32,6 +32,10 @@
 
             <div class="field is-grouped" v-else>
               <p class="control">
+                <button class="button is-primary" @click="showCategoryForm = !showCategoryForm">Add Category</button>
+              </p>
+
+              <p class="control">
                 <button class="button is-danger" @click="logOut">Logout</button>
               </p>
             </div>
@@ -40,6 +44,22 @@
       </div>
     </nav>
 
+    <div class="modal" :class="{'is-active': showCategoryForm}">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <form @submit.prevent="addCategory">
+          <div class="field">
+            <input type="text" class="input" v-model="catTitle">
+          </div>
+
+          <div class="field">
+            <button class="button is-success">Add Category</button>
+          </div>
+        </form>
+      </div>
+      <button class="modal-close is-large" aria-label="close" @click="showCategoryForm = !showCategoryForm"></button>
+    </div>
+
     <router-view/>
   </div>
 </template>
@@ -47,11 +67,14 @@
 
 <script>
 import firebase from "firebase";
+import { db } from "./main";
 
 export default {
   data() {
     return {
-      isAuthenticated: false
+      isAuthenticated: false,
+      showCategoryForm: false,
+      catTitle: ""
     };
   },
   created() {
@@ -66,6 +89,11 @@ export default {
       firebase.auth().signOut();
       this.isAuthenticated = false;
       this.$router.push("/login");
+    },
+    addCategory() {
+      db.collection("categories").add({ title: this.catTitle });
+      this.showCategoryForm = !this.showCategoryForm;
+      this.catTitle = "";
     }
   }
 };
