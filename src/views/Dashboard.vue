@@ -14,9 +14,10 @@
       </ul>
     </div>
 
-    <TabVideo :categories="categories" category="Newest" v-if="activeCategory === 'Newest'"></TabVideo>
+    <TabVideo :categories="categories" category="Newest" v-if="activeCategory === 'Newest'" />
 
-    <TabVideo v-for="category in categories" :key="category.id" :category="category.title" v-if="activeCategory === category.title"></TabVideo>
+    <TabVideo v-for="category in categories" :key="category.id" v-if="activeCategory === category.title" :category="category.title" :categoryID="category.id" @updateCategory="setCategory" />
+
   </div>
 </template>
 
